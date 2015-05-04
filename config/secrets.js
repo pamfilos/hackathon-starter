@@ -143,5 +143,13 @@ module.exports = {
 
   lob: {
     apiKey: process.env.LOB_KEY || 'test_814e892b199d65ef6dbb3e4ad24689559ca'
+  },
+
+  expedia: {
+    cid     : "55505",
+    apiKey  : "jdc8uajf82vh9vfah24kbnte",
+    locale  : "en_US",  // optional defaults to en_US
+    currencyCode :"EUR"  // optional defaults to USD
   }
+
 };

@@ -1,0 +1,145 @@
+extends layout
+
+block styles
+  != css('vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker')
+  script(type="text/template")#template
+    <div id="full-clndr" class="clearfix"> 
+    <div class="clndr-controls">
+    <div class="clndr-previous-button">&lsaquo;</div>
+    <div class="clndr-next-button">&rsaquo;</div>
+    <div class="month"><%= month %></div>
+    </div>
+    <div class="clndr-grid">
+    <div class="days-of-the-week clearfix">
+    <% _.each(daysOfTheWeek, function(day) { %>
+    <div class="header-day"><%= day %></div>
+    <% }); %>
+    </div>
+    <div class="days clearfix">
+    <% _.each(days, function(day) { %>
+    <div class="<%= day.classes %>" id="<%= day.id %>"><span class="day-number"><%= day.day %></span></div>
+    <% }); %>
+    </div>
+    </div>
+    <div class="event-listing">
+    <div class="event-listing-title">EVENTS FOR <span class="title">TODAY<span></div>
+    <div class="event-listing-items"></div>
+    </div>
+    </div>
+
+
+
+block content
+  div#hotel-header.row
+    h1.col-sm-6 
+      span.pull-left Alexandros Hotel
+      input(id='search-date-field',
+        class='datepicker',
+        type='text',
+        value='Today',
+        placeholder = 'Today',
+        disabled,
+        name='searchdate',
+        data-provider='datepicker')
+      span.input-group-addon.addon.datepicker#fff
+        i.fa.fa-calendar
+
+    h2.col-sm-6
+      div#booking-date.input-daterange.input-daterange
+        input(id='booking-date-field-from',
+          class='datepickr input-small',
+          type='text',
+          value='',
+          placeholder='From',
+          name='bookingdate-from')
+        span.add-on -
+        input(id='booking-date-field-to',
+          class='datepicer input-small',
+          type='text',
+          value='',
+          placeholder='To',
+          name='bookingdate-to')
+  hr
+
+  div#status-info.row
+    div.col-sm-12#status-spinner
+      span.fa.fa-spinner.fa-spin
+    div#status-info-text.col-sm-12
+      
+
+  hr
+  .row
+    .col-sm-12
+      section#overview
+        h2 Month Overview
+        div#calendar.cal-home
+
+  hr
+  .row
+    .col-sm-12
+      section#hotels
+        h2 Hotels Info & Rates
+          a#chris-hotels-container-btn.btn Get data
+          input(id='hotel-autocomplete',
+            type='hidden',
+            placeholder='Add hotel names',
+            name='hotel-autocomplete')
+        div#hotels-container
+          
+          input(id='hotels-container-list',
+            type='hidden',
+            name='hotels-container-list')
+        div#hotels-list.row
+          div#hotels-list-results
+
+  hr
+  .row
+    .col-sm-12
+      section#history
+        h2 History 
+        div#history-datamap
+          each yv, yk in overall
+        
+            div.row
+              div.year.col-sm-1
+                h4 #{yk}
+              div.weeks.col-sm-11
+                each w in yv
+                  if w.filename
+                    div(title="Week: "+w.week, data-content=w.filename, data-toggle='popover', role='button').week.available #{w.week}
+                  else
+                    div(title=w.filename).week #{w.week}
+      section#info
+        h2 Info
+        div#newdata
+block bundles
+  link(href='//cdn.datatables.net/1.10.5/css/jquery.dataTables.css', rel='stylesheet')
+  script(type='text/javascript', src='http://cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js')
+  script(type='text/javascript').
+    var calendar;
+    $(document).ready(function(){
+      calendar = $('#calendar').clndr({
+        template: $('#template').html(),
+        events: !{JSON.stringify(mevents[0])},
+        multiDayEvents: {
+          startDate: 'start',
+          endDate: 'end'
+        },
+        clickEvents: {
+          click: function(target) {
+            console.log(target);
+            $('.event-listing-title span.title').text(target.date.format('DD-MM-YYYY'));
+            var body='';
+            $.each(target.events, function(i,v){
+                body += '<div class="event-item">';
+                body += '<div class="event-item-name">'+v.title+'<a href="'+v.link+'"><span class="fa fa-external-link"></span></a></div>';
+                body += '<div class="event-item-location">'+v.location+'</div>';
+                body += '</div>';
+              });
+            $('.event-listing-items').html(body);
+          }
+        }
+      });
+    });
+   
+    

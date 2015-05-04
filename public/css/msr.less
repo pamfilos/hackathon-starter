@@ -1,0 +1,427 @@
+@import "colors";
+
+.date {
+	float: left;
+	list-style-type: none;
+}
+
+.tab-box {
+	margin-bottom: 40px;
+
+	.nav-tabs {
+		display: none;
+
+		#calendar-overview-tab {
+			background-color: transparent;
+			border: 0;
+
+			.active > a {
+				color: inherit;
+				background-color: transparent;
+				border: 0;
+				border-bottom-color: transparent;
+				cursor: default;
+			}
+		}
+
+		#calendar-overview-tab.active > a {
+			color: inherit;
+			background-color: transparent;
+			border: 0;
+			border-bottom-color: transparent;
+			cursor: default;
+		}
+		#calendar-settings-tab {
+
+		}
+	}
+
+	.tab-content {
+		.tab-pane {
+			// background-color: #ccc;
+			height: 400px;
+			box-shadow: 0 0px 3px #ccc;
+  			border-radius: 3px;
+			border-top: 4px solid @cal-month-bgc;
+		}
+	}
+
+	#calendar-overview-1 {
+		// background-color: blue;
+	}
+
+	#calendar-settings-1 {
+		// background-color: red;
+	}
+}
+
+
+#msrAvailabilityCal {
+	margin-top: 35px;
+	margin-bottom: 35px;
+	// box-shadow: 0 1px 3px #ccc;
+
+	header {
+		font-size: 24px;
+		color: #777;
+		line-height: 24px;
+		margin-bottom: 10px;
+
+		span.fa { 
+			color: #ccc;
+			font-size: 20px;
+			margin-top: 2px;
+		}
+
+		a.btn {
+			background-color: @cal-month-bgc;
+			height: 25px;
+			line-height: 25px;
+			padding: 0 10px;
+			margin-top: -2px;
+			margin-left: 10px;
+			color: #fff;
+			font-size: 15px;
+				
+			span.fa {
+				font-size: 14px;
+			}
+		}
+	}
+
+	.box {
+		height: 40px;
+		width: 3.2%;
+		text-align: center;
+		line-height: 40px;
+		border: 1px solid #f8f8f8;
+		padding: 0;
+	}
+
+	#calendar {
+		margin-bottom: 40px;
+	}
+
+
+	.calrow {
+		height: 40px;
+	}
+
+	#calendar-container {
+		position: relative;
+		display: inline-block;
+		width: 100%;
+
+		.calendar-content {
+			width: 100%;
+			display: inline-block;
+
+			.modal-dialog {
+				width: 600px;
+				float: none;
+			}
+			> div > div {
+				width: 100%;
+				float: left;
+
+				.box {
+					float: left;
+				}
+
+				.box.NaN {
+						content: '';
+						background-color: #e7e7e7!important;
+					}
+
+
+				.box.more {
+					color: #88A688;
+				}
+				.box.less {
+					color: @cal-revcal-box;
+				}
+				.box.eq {
+					color: #666;
+				}
+				.box.noofficial {
+					color: @cal-defprv-box;
+				}
+				input {
+					float: left;
+				}
+			}
+
+			.nodata-warning {
+				width: 100%;
+				float: left;
+				text-align: center;
+				margin-top: 140px;
+				font-weight: 600;
+				font-size: 30px;
+				color: #bbb;
+			}
+
+			
+			.changed {
+				background-color: purple;
+			}
+
+			.overbooked {
+				background-color: rgba(255, 90, 55, 0.48);
+			}
+
+			.roomtype-listing {
+				float: left;
+
+				input{
+					float: left;
+				}
+			}
+
+			#definite-data {
+				.box {
+					background-color: @cal-def-box;
+				}
+			}
+
+			#provisional-data {
+				.box {
+					background-color: @cal-prv-box;
+				}
+			}
+
+			#sum-data {
+				.box {
+					background-color: @cal-defprv-box;
+					color: #fff;
+				}
+			}
+
+			#revcalc-data {
+				.box {
+					background-color: @cal-revcal-box;
+					font-weight: 700;
+					color: #fff;
+				}
+				.box.overbooked {
+					background-color: rgba(255, 90, 55, 0.48);
+				}
+			}
+
+
+		}
+
+		#calendar-left-sidebar {
+			position: absolute;
+			width: 50px;
+			left: -50px;
+			// background-color: #ccc;
+			text-align: center;
+			line-height: 40px;
+			font-weight: 400;
+			
+			> div {
+				border-bottom-left-radius: 4px;
+				border-top-left-radius: 4px;
+				float: right;
+				padding: 0 10px;
+				white-space: nowrap;
+				box-shadow: -1px 1px 3px #ccc;
+			}
+
+			.calrow {
+				color: #fff;
+			}
+
+			.roomtypes {
+				background-color: @cal-room;
+				color: : #fff;
+			}
+
+			.defenite {
+				background-color: @cal-def;
+			}
+
+			.provisional {
+				background-color: @cal-prv;
+			}
+			.sum {
+				background-color: @cal-defprv;
+			}
+			.revcalc {
+				background-color: @cal-revcal;
+			}
+		}
+
+		#calendar-right-sidebar {
+			float: left;
+			display: inline-block;
+			position: absolute;
+			background-color: #ccc;
+			width: 100px;
+			height: 200px;
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+		}
+	}
+	
+
+	.msr-clndr, .calendar-clone {
+		width: 100%;
+		background-color: #ebebeb;
+		font-weight: 700;
+		border-top-right-radius: 3px;
+		border-top-left-radius: 3px;
+		
+		.empty {
+			display: none;
+		}
+
+		
+		.clndr-controls {
+			padding: 14px;
+			background-color: @cal-month-bgc;
+			color: white;
+			text-align: center;
+			height: 50px;
+			border-top-left-radius: 3px;
+			border-top-right-radius: 3px;
+
+			.clndr-controls-info {
+				text-align: center;
+				display: inline-block;
+			}
+			.month {
+				display: inline-block;
+				float: left;
+			}
+			.clndr-today-button {
+				background-color: #fff;
+				color: #3b4869;
+				border: 0;
+				border-radius: 3px;
+				height: 20px;
+				font-size: 12px;
+				margin-left: 10px;
+				float: left;
+			}
+
+			.clndr-previous-button, 
+			.clndr-next-button {
+				width: 30px;
+				cursor: pointer;
+				-webkit-user-select: none;
+				/* Chrome/Safari */
+				-moz-user-select: none;
+				/* Firefox */
+				-ms-user-select: none;
+				/* IE10+ */
+			}
+			.clndr-previous-button{
+				float: left;
+				text-align: left;
+			}
+			.clndr-next-button {
+				float: right;
+				text-align: right;
+			}
+		}
+
+		.clndr-grid {
+			float: left;
+			width: 100%;
+
+			.day {
+				// min-width: 30px;
+				// width: 3.24%;
+				float: left;
+				// text-align: center;
+				// border-right: 2px solid white; 
+			}
+		}
+	}
+
+	.msr-clndr {
+		.clndr-controls {
+			border-radius: 3px;
+		}
+		.clndr-grid {
+			display: none;
+		}
+	}
+
+	.calendar-clone{
+		.clndr-controls {
+			background-color: #ccc;
+			display: none;
+
+			.clndr-previous-button, 
+			.clndr-next-button {
+				display: none;
+			}
+		}		
+	}
+}
+
+.infobox {
+	background-color: #fff;
+	float: left;
+	display: inline-block;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #ccc;
+	width: 100%;
+
+	h4 {
+		background-color: @cal-month-bgc;
+		margin: 0;
+		text-align: center;
+		padding: 10px;
+		color: #fff;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+
+	.infobox-inner {
+		padding: 5px;
+	}
+}
+
+.calendar-info{
+	width: 100%;
+	display: inline-block;
+	padding: 20px 0;
+
+	.infobox {
+		.header {
+			font-weight: 600;
+		}
+		.infobox-row {
+			width: 100%;
+			line-height: 30px;
+			border-bottom: 1px solid #eee;
+			display: inline-block;
+			text-align: center;
+			
+			> div {
+				float: left;
+			}
+			.type {
+				width: 40%;
+			}
+			.term {
+				width: 30%;
+			}
+			.diff {
+				background-color: #eee;
+				width: 30%;
+			}
+			.range, .rtype {
+				width: 70%;
+			}
+			.price {
+				width: 30%;
+				background-color: #eee;
+			}
+		}
+	}	
+}

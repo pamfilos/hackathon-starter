@@ -1,0 +1,41 @@
+div(id="hotel-month-"+hotel["id"])
+	each rt in hotelRooms
+		div.roomtype-listing
+			- for (var i =0 ; i<firstday-1;i++){
+				div.roomdateprice.box.NaN
+			- }	
+			each d in hotelMonth
+				div(class=d.price[rt.cat]['compare']).roomdateprice.box
+					| #{d.price[rt.cat]['price']}
+
+	#definite-data
+		- for (var i =0 ; i<firstday-1;i++){
+			.box.NaN 
+		- }	
+		each d in hotelMonth
+			- if (d.provisional)
+				.box #{d.sum - d.provisional}
+			- else 
+				.box #{d.sum}	
+	#provisional-data
+		- for (var i =0 ; i<firstday-1;i++){
+			.box.NaN 
+		- }	
+		each d in hotelMonth
+			- if (d.provisional)
+				.box #{d.provisional}
+			- else
+				.box 0
+	#sum-data
+		- for (var i =0 ; i<firstday-1;i++){
+			.box.NaN 
+		- }	
+		each d in hotelMonth
+			.box #{d.sum}
+	#revcalc-data
+		- for (var i =0 ; i<firstday-1;i++){
+			.box.NaN 
+		- }	
+		each d in hotelMonth
+			div(class=( d.overbooked ? "overbooked " : " ")).box
+				| #{d.revcal}

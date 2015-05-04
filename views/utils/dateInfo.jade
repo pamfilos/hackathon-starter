@@ -1,0 +1,28 @@
+p 
+  h5 Date for reservation: 
+  p #{date}
+  p #{week}
+  p 
+    h6 List of json files:
+    ul#filename-buttons.row
+      each f in filenames
+        li
+          button.filename-button #{f}
+    div#datetables
+
+    each y,k in files
+      div(id=k).datefile
+        h4 #{k}
+        each f in y
+          table.datetable.table
+            thead
+              tr: each h,v in f[0]
+                th #{v}
+            tbody: each d in f
+              tr: each c in d
+                td #{c}
+
+
+      
+
+      

@@ -1,0 +1,23 @@
+div.calendar-clone
+div#calendar-container
+	div#calendar-left-sidebar
+		div.top
+		div.roomtypes
+			each rt in hotel["rooms"]
+				div.roomtype.calrow
+					| #{rt.cat}
+		div.defenite
+			.calrow
+				| Definite
+		div.provisional
+			.calrow
+				| Provisional
+		div.sum
+			.calrow
+				| Def + Prov						
+		div.revcalc
+			.calrow
+				| Rev.Calc
+	div.calendar-content
+		include ./msrMonth.jade
+	div#calendar-right-sidebar

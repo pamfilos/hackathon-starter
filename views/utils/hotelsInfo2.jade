@@ -1,0 +1,38 @@
+div.col-sm-12
+  if (hotels['HotelListResponse']['HotelList'] != undefined)
+    - var hhh = hotels['HotelListResponse']['HotelList']['HotelSummary'][0]['RoomRateDetailsList']
+    - var curr_date = moment(from);
+
+    div
+      if hotels['HotelListResponse']['HotelList'] == undefined
+        | No hotels found
+      else if hotels['HotelListResponse']['HotelList']['@size'] > 1
+        each hotel,k in hotels['HotelListResponse']['HotelList']['HotelSummary']
+            div.hotel-thumb
+              header
+                div.col-sm-6
+                  | #{hotel['name']}
+                  h5  
+                    | #{hotel['address1']}, #{hotel['postalCode']} #{hotel['city']}
+                div.col-sm-6.ratings-container
+                    | Rating: #{hotel['hotelRating']}
+                    br
+                    | TripAdvisor Rating: #{hotel['tripAdvisorRating']}                  
+              body
+                div.col-sm-12
+                  h6 Room rates ( for #{hotel['RoomRateDetailsList']['RoomRateDetails']['roomDescription']})
+                  - var rateInfo = hotel['RoomRateDetailsList']['RoomRateDetails']['RateInfo'];
+                  div.date-rates
+                    each r in rateInfo['ChargeableRateInfo']['NightlyRatesPerRoom']['NightlyRate']
+                      div.date-rate
+                        span.date #{curr_date.format('DD/MM')}
+                        span.rates 
+                          | #{r['@rate']} 
+                          br
+                          |( #{r['@baseRate']} )
+                      - curr_date.add('days',1);
+
+  else if (hotels['HotelListResponse']['EanWsError'] != undefined)
+    if (hotels['HotelListResponse']['EanWsError']['verboseMessage'] != undefined)
+      span.warning
+        | #{hotels['HotelListResponse']['EanWsError']['verboseMessage']}

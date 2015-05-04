@@ -19,3 +19,8 @@ node_modules
 *.iml
 .DS_Store
 Thumbs.db
+
+public/js/vendors/*
+public/css/vendors/*
+public/css/vendor/*
+public/vendors/*

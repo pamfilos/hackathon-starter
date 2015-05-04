@@ -1,0 +1,48 @@
+extends layout
+
+block styles
+	script(type="text/template")#template.
+		<div id="msr-clndr-main" class="msr-clndr clearfix"> 
+			<div class="clndr-controls">
+				<div class="clndr-previous-button">&lsaquo;</div>
+				<div class="clndr-next-button">&rsaquo;</div>
+				<div class="clndr-controls-info">
+					<div class="month"><%= month %> <%= year %></div>
+					<button class="clndr-today-button">Today</button>
+				</div>
+			</div>
+			<div class="clndr-grid">
+				<div class="clearfix">
+					<div class="days clearfix">
+					<% _.each(days, function(day) { %>
+							<div class="box <%= day.classes %>" id="<%= day.id %>">
+								<span class="day-number"><%= day.day %></span>
+							</div>
+					<% }); %>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	!= css('msr')
+
+block content
+
+	div#msrAvailabilityCal
+		div#calendar
+		div#hotels
+			each hotel in hotels
+				div(id='h_'+hotel.id).hotel
+					header
+						| #{hotel.name}
+						a(id="update-button-"+hotel.id, data-toggle="modal", data-target="#modified-prices-modal-"+hotel["id"]).pull-right.btn
+							span.fa.fa-refresh
+							| Update
+						a(id="add-event-modal-but-"+hotel.id, data-toggle="modal", data-target="#add-event-modal-"+hotel["id"]).pull-right.btn
+							span.fa.fa-calendar
+							| Add event
+						span.pull-right.fa.fa-cog.toggle-tabs-button
+					include ./utils/msrTabs.jade
+
+
+

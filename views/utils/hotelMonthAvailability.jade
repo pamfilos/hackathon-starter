@@ -1,0 +1,11 @@
+each week, key in hotelsL
+	h3 #{key} #{val}
+	div
+		if (week['HotelRoomAvailabilityResponse']['@size'] <= 0)
+			if (week['HotelRoomAvailabilityResponse']['EanWsError'])
+				| #{week['HotelRoomAvailabilityResponse']['EanWsError']['presentationMessage']}
+				|  [#{week['HotelRoomAvailabilityResponse']['EanWsError']['category']}]
+				p  !{JSON.stringify(week['HotelRoomAvailabilityResponse']['EanWsError'])}
+		else
+			| !{JSON.stringify(week)}
+	hr

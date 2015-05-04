@@ -14,5 +14,11 @@
  */
 
 //= require lib/jquery-2.1.3.min
+//= require vendors/devbridge-autocomplete/dist/jquery.autocomplete.min
+//= require vendors/tagify/jquery.tagify
 //= require lib/bootstrap.min
+//= require vendors/moment/moment
+//= require vendors/underscore/underscore
+//= require vendors/clndr/src/clndr
+//= require vendors/bootstrap-datepicker/js/bootstrap-datepicker
 //= require main

@@ -1,0 +1,9 @@
+each hotel in hotels
+		- if (hotelMonthGroup[hotel["id"]].length > 0){
+			include ./msrMonth.jade
+			include ./msrTabHotelSettings.jade
+		- } else {
+			div(id="hotel-month-"+hotel["id"]).hotel-month 
+				div.nodata-warning
+					| Data doesn't exist for selected month
+		- }

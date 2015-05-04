@@ -1,0 +1,43 @@
+if hotelsL['HotelListResponse'] == undefined
+	- var hotel = hotelsL['HotelListResponse']['HotelList']['HotelSummary'];
+	div.hotel-thumb
+		header
+			| #{hotel['name']}
+		h5
+			| #{hotel['address1']}, #{hotel['postalCode']} #{hotel['city']}
+		body
+			div
+			| Rating: #{hotel['hotelRating']}
+			br
+			| TripAdvisor Rating: #{hotel['tripAdvisorRating']}
+			br
+			h6 Room rates ( for #{hotel['RoomRateDetailsList']['RoomRateDetails']['roomDescription']})
+			- var rateInfo = hotel['RoomRateDetailsList']['RoomRateDetails']['RateInfo'];
+			each r in rateInfo['ChargeableRateInfo']['NightlyRatesPerRoom']['NightlyRate']
+				span #{r['@rate']} ( #{r['@baseRate']} )
+			br
+		br
+else
+	=JSON.stringify(hotelsL)
+
+
+hr
+
+if hotelsA['HotelRoomAvailabilityResponse']['@size'] == '0'
+	if hotelsA['HotelRoomAvailabilityResponse']['EanWsError'] != undefined
+		| #{hotelsA['HotelRoomAvailabilityResponse']['EanWsError']['presentationMessage']}
+		| [#{hotelsA['HotelRoomAvailabilityResponse']['EanWsError']['category']}]
+else
+	div
+		each r,k in hotelsA['HotelRoomAvailabilityResponse']['HotelRoomResponse']
+			h5 #{r['roomTypeDescription']}
+			each e, k in r
+				div 
+					b #{k}:
+					- if (typeof e === "object")
+						| #{JSON.stringify(e, null, 4)}
+					- else 
+						| #{e}
+
+
+			hr

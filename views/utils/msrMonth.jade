@@ -1,0 +1,13 @@
+- var hotelMonth = hotelMonthGroup[hotel["id"]];
+- var hotelRooms = hotel["rooms"];
+- for (var first in hotelMonth) break;
+- var firstday = hotelMonth[first].date.format('DD');
+- var firstdaymonth = hotelMonth[first].date.format('MM');
+
+- if (user.profile.role.indexOf("admin") >-1)
+	include ./msrMonthAdmin
+- else if (user.profile.role.indexOf("guest") > -1)
+	include ./msrMonthBase
+- else
+	include ./msrMonthBase
+

@@ -3,6 +3,7 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
+  username: {type: String, unique: true},
   email: { type: String, unique: true, lowercase: true },
   password: String,
 
@@ -19,7 +20,8 @@ var userSchema = new mongoose.Schema({
     gender: { type: String, default: '' },
     location: { type: String, default: '' },
     website: { type: String, default: '' },
-    picture: { type: String, default: '' }
+    picture: { type: String, default: '' },
+    role: { type: Array, default: [] }
   },
 
   resetPasswordToken: String,
@@ -57,8 +59,8 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
  */
 userSchema.methods.gravatar = function(size) {
   if (!size) size = 200;
-  if (!this.email) return 'https://gravatar.com/avatar/?s=' + size + '&d=retro';
-  var md5 = crypto.createHash('md5').update(this.email).digest('hex');
+  if (!this.username) return 'https://gravatar.com/avatar/?s=' + size + '&d=retro';
+  var md5 = crypto.createHash('md5').update(this.username).digest('hex');
   return 'https://gravatar.com/avatar/' + md5 + '?s=' + size + '&d=retro';
 };
 

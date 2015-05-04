@@ -1,0 +1,13 @@
+div(role="tabpanel", id='h_'+hotel.id).tab-box
+  ul(role="tablist").nav.nav-tabs
+    li(role="presentation")#calendar-overview-tab.active
+      a(href="#calendar-overview-"+hotel.id, role="tab", data-toggle="tab") Calendar #{hotel.name}
+    li(role="presentation")#calendar-settings-tab
+      a(href="#calendar-settings-"+hotel.id, role="tab", data-toggle="tab")
+        span.fa.fa-cog
+
+  div.tab-content
+    div(role="tabpanel", id='calendar-overview-'+hotel.id).tab-pane.fade.in.active
+      include ./msrTabHotelOverview.jade
+    div(role="tabpanel", id='calendar-settings-'+hotel.id).tab-pane
+      include ./msrTabHotelSettings.jade

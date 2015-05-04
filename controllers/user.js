@@ -11,7 +11,7 @@ var secrets = require('../config/secrets');
  * Login page.
  */
 exports.getLogin = function(req, res) {
-  if (req.user) return res.redirect('/');
+  if (req.user) return res.redirect('/msr');
   res.render('account/login', {
     title: 'Login'
   });
@@ -22,7 +22,7 @@ exports.getLogin = function(req, res) {
  * Sign in using email and password.
  */
 exports.postLogin = function(req, res, next) {
-  req.assert('email', 'Email is not valid').isEmail();
+  // req.assert('email', 'Email is not valid').isEmail();
   req.assert('password', 'Password cannot be blank').notEmpty();
 
   var errors = req.validationErrors();
@@ -32,7 +32,12 @@ exports.postLogin = function(req, res, next) {
     return res.redirect('/login');
   }
 
-  passport.authenticate('local', function(err, user, info) {
+  req.session.returnTo = req.path;
+  passport.authenticate('local', {
+      failureRedirect: '/login',
+      successReturnToOrRedirect : '/'
+    }
+    , function(err, user, info) {
     if (err) return next(err);
     if (!user) {
       req.flash('errors', { msg: info.message });
@@ -84,12 +89,13 @@ exports.postSignup = function(req, res, next) {
 
   var user = new User({
     email: req.body.email,
+    username: req.body.username,
     password: req.body.password
   });
 
-  User.findOne({ email: req.body.email }, function(err, existingUser) {
+  User.findOne({ $or : [{ username: req.body.username }, { email: req.body.email }]}, function(err, existingUser) {
     if (existingUser) {
-      req.flash('errors', { msg: 'Account with that email address already exists.' });
+      req.flash('errors', { msg: 'Account with that username/email address already exists.' });
       return res.redirect('/signup');
     }
     user.save(function(err) {
@@ -119,6 +125,7 @@ exports.getAccount = function(req, res) {
 exports.postUpdateProfile = function(req, res, next) {
   User.findById(req.user.id, function(err, user) {
     if (err) return next(err);
+    user.username = req.body.username || '';
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
     user.profile.gender = req.body.gender || '';

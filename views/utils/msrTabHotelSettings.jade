@@ -1,0 +1,48 @@
+- var monthnum = month.month()+1;
+
+div(id="calendar-info-"+hotel["id"]).calendar-info
+	.col-sm-3.col-xss-12
+		.hotel-ratios.infobox
+			h4 Hotel Scales
+			div.infobox-inner
+				div.infobox-row.header
+					div.range Rooms Range
+					div.price Price
+				each ratio in hotel['month_ratio'][monthnum]
+					div.infobox-row
+						div.range #{ratio['ratiomin']} - #{ratio['ratiomax']}
+						div.price #{ratio['price']}
+	.col-sm-3.col-xs-12
+		.hotel-pricing-remarks.infobox
+			h4 Pricing Remarks
+			div.infobox-inner
+				div.infobox-row.header
+					div.type Type
+					div.term Term
+					div.diff Policy
+				each rules in hotel['remarks'][monthnum]
+					div.infobox-row
+						- if (rules['type'] == 'DBL') {
+							div.type SINGL-DBL
+							div.term #{rules['price']}
+							div.diff #{rules['diff']}
+						- } else if (rules['type'] == 'STAY') {
+							div.type STAY
+							div.term #{rules['count']}
+							div.diff #{rules['discount']}
+						- }
+	
+	.col-sm-3.col-xs-12
+		include ./msrTabHotelData.jade
+
+	.col-sm-3.col-xs-12.pull-right
+		.hotel-official-prices.infobox
+			h4 Official Prices
+			div.infobox-inner
+				div.infobox-row.header
+					div.rtype Room Type
+					div.price Price
+				each officials in hotel['off_prices'][monthnum]
+					div.infobox-row
+						div.rtype #{officials['type']}
+						div.price #{officials['price']}

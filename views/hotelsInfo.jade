@@ -1,0 +1,6 @@
+
+
+each h in hotels
+	each s,k in h['HotelList']['HotelSummary']
+		div.col-sm-3 #{k} #{s.name}
+		

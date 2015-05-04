@@ -3,6 +3,9 @@
 @import "vendor/ionicons/ionicons";
 @import "vendor/bootstrap-social";
 @import "themes/default";
+@import "vendor/clndr";
+@import (css) "vendor/devbridge-autocomplete/content/styles.css";
+@import "colors";
 
 // Scaffolding
 // -------------------------
@@ -15,6 +18,8 @@ html {
 body {
   padding-top: 60px;
   margin-bottom: 75px;
+  background-color: #f4f4f4;
+  font-family: 'Open Sans'
 }
 
 footer {
@@ -23,6 +28,7 @@ footer {
   width: 100%;
   height: 45px;
   line-height: 45px;
+  padding: 0 15px;
 
   p,
   ul {
@@ -32,11 +38,30 @@ footer {
 
 // Navbar
 // -------------------------
+.navbar.navbar-default {
+  background-color: @navbar-bgc;
+
+  .navbar-nav a {
+    color: @navbar-c;
+    
+  }
+
+
+  a {
+    color: @navbar-c;
+  }
+}
+
+
 
 .navbar-nav img {
   width: 30px;
   height: 30px;
   margin: -15px 15px -15px;
+}
+
+.collapse.navbar-collapse {
+  padding: 0 15px;
 }
 
 // Alerts
@@ -61,4 +86,250 @@ footer {
 .fa,
 [class^='ion-'] {
   margin-right: 6px;
+}
+
+
+// 
+// 
+h2 {
+  color: #888888;
+}
+section {
+  padding-bottom: 40px;  
+}
+
+#hotel-header form {
+  float: right;
+}
+
+#hotel-header form > div {
+  float: left;
+}
+
+.week {
+  float: left;
+  font-size: 16px;
+  line-height: 1.1;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  width: 39px;
+  text-align: center;
+  font-weight: 100;
+  background-color: #3883a3;
+  color: #fff;
+}
+
+.available {
+  background-color: #71bbd2;
+}
+
+#history-datamap {
+  background-color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.09);
+  border-radius: 3px;
+  padding-left: 10px;
+}
+
+#history-datamap .weeks {
+  right: -20px;
+}
+
+#status-info {
+  p {
+    font-size: 30px;
+    color: #8f8f8f;
+    font-weight: 300;
+  }
+
+  #status-spinner {
+    text-align: right;
+    // display: none;
+  }
+}
+
+#full-clndr .clndr-grid .days .day.onrange {
+  border-top: #85ebff solid 15px;
+  padding-top: 10px;
+}
+
+.datepicker {
+  padding: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  direction: ltr;
+}
+
+#booking-date {
+  float: right;
+}
+
+#booking-date input {
+  max-width: 170px;
+  float: left;
+  padding: 0;
+  line-height: 40px;
+}
+
+#booking-date span.add-on {
+  float: left;
+  height: 42px;
+  line-height: 40px;
+  padding: 0;
+  width: 42px;
+}
+
+#search-date-field {
+  background-color: #f4f4f4;
+  border: 0;
+  margin-top: 10px;
+  text-align: center;
+  float: left;
+  width: 105px;
+  font-size: 22px;
+  color: #a9a9a9;
+}
+
+.input-group-addon {
+  float: left;
+  font-size: 22px;
+  border: 0;
+  padding-top: 12px;
+  background-color: inherit;
+  color: #a9a9a9;
+}
+
+.dataTables_wrapper{
+  overflow: scroll;
+}
+
+#filename-buttons {
+ list-style-type: none;
+ padding: 0;
+
+ li {
+  float: left;
+  padding-left: 15px;
+  padding-right: 15px;
+ }
+}
+
+.filename-button {
+  background-color: #3883A3;
+  border: 0;
+  border-radius: 2px;
+  color: #fff;
+  font-weight: 700;
+  padding: 13px;
+  font-size: 21px;
+}
+
+#hotels-container {
+  width: 100%;
+  float: left;
+}
+
+#hotel-autocomplete {
+  margin-left: 10px;
+  height: 33px;
+  display: inline-block;
+  position: absolute;
+  top: 20px;
+  line-height: 33px;
+  font-size: 18px;
+}
+
+#hotels a.btn {
+  margin-left: 0;
+  height: 30px;
+  display: inline-block;
+  border: 0;
+  background-color: #fff;
+  color: #429bc1;
+  border-radius:2px;
+  line-height: 16px;
+  font-size: 16px;
+  font-weight: 900px;
+}
+
+#hotels #chris-hotels-container-btn.btn {
+  margin-left: 10px;
+}
+
+#hotels-list {
+  float: left;
+  width: 100%;
+  margin-top: 20px;
+}
+.tagify-tag {
+  float: left;
+  background-color: #429bc1;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius:2px;
+  margin-right: 5px;
+}
+
+.event-listing-items{
+  height: 330px;
+  overflow: scroll;
+}
+
+
+
+
+
+// HOTEL THUMBNAILS
+
+.hotel-thumb {
+  background-color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.09);
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 15px;
+  display: inline-block;
+
+}
+.hotel-thumb header {
+  font-size: 24px;
+  font-weight: 600;
+  width: 100%;
+  display: inline-block;
+}
+
+.hotel-thumb h6 {
+  margin-top: -10px;
+}
+.hotel-thumb h5 {
+  color: #ccc;
+}
+
+.hotel-thumb .ratings-container {
+  font-size: 14px;
+  text-align: right;
+}
+
+.hotel-thumb .date-rate {
+  width: 8%;
+  min-width: 100px;
+  float: left;
+  background-color: #e6e6e6;
+  border-right:1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.hotel-thumb .date-rate span {
+  width: 100%;
+  float: left;
+  padding: 0 5px;
+  text-align: center;
+}
+.hotel-thumb .date-rate .date {
+  font-weight: 900;
+  // margin-top: -5px;
+  // margin-left: -5px;
+  text-align: left;
+  background-color: #ccc;
+  width: 50px!important;
+  border-bottom-right-radius: 4px;
 }

@@ -1,0 +1,17 @@
+div#home-signin-form
+	header Sign in
+	hr
+	form(method='POST' action='/login').row
+		input(type='hidden', name='_csrf', value=_csrf)
+		.col-sm-12.ccol-sm-offset-2
+			.form-group
+				label.control-label(for='username') Username
+				input.form-control(type='username', name='username', id='username', placeholder='Username', autofocus=true)
+			.form-group
+				label.control-label(for='password') Password
+				input.form-control(type='password', name='password', id='password', placeholder='Password')
+			.form-group
+				button.btn.btn-primary(type='submit')
+					span.ion-android-hand
+					| Login
+				a.btn.btn-link(href='/forgot') Forgot your password?

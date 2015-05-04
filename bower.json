@@ -1,0 +1,32 @@
+{
+  "name": "airotel",
+  "version": "0.0.1",
+  "homepage": "",
+  "authors": [
+    "Pamfilos Fokianos <pamfilosf@gmail.com>"
+  ],
+  "description": "airotel",
+  "main": "public/js/main.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap" : "latest",
+    "leaflet" : "latest",
+    "clndr": "latest"
+  },
+  "devDependences": {
+
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

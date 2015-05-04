@@ -1,0 +1,18 @@
+div(id="calendar-data-"+hotel["id"]).calendar-data
+	button(type="button", data-toggle="modal", data-target="#hotel-data-modal-"+hotel["id"]).btn
+		| Show data
+	div(id="hotel-data-modal-"+hotel["id"], tabindex="-1",role="dialog",aria-labelledby="pamf",aria-hidden="true").modal.fade
+		div.modal-dialog
+			div.modal-content
+				div.modal-header
+					button(type="button", data-dismiss="modal", aria-label="Close")
+						span(arira-hidden="true")
+							| &times;
+					span(id="myModalLabel").modal-title
+						| This is the title
+
+				div.modal-body.row
+					each day in hotelMonth
+						.col-sm-12
+							strong #{day.date.format('DD/MM/YYYY')}
+							| !{JSON.stringify(day)}
