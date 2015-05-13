@@ -2,10 +2,10 @@ div(id="hotel-month-"+hotel["id"])
 	each rt in hotelRooms
 		div.roomtype-listing
 			- for (var i =0 ; i<firstday-1;i++){
-				input(name="roomday"+rt.cat+"-"+i, disabled="disabled").roomdateprice.box.NaN
+				input(name="rd-"+hotel["id"]+"-"+rt.cat+"-"+i, disabled="disabled").roomdateprice.box.NaN
 			- }	
 			each d in hotelMonth
-				input(name="roomday"+rt.cat+"-"+i, value=d.price[rt.cat]['price'], class=d.price[rt.cat]['compare']).roomdateprice.box
+				input(name="rd-"+hotel["id"]+"-"+rt.cat+"-"+d.date.format('DDMMYYYY'), value=d.price[rt.cat]['price'], class=d.price[rt.cat]['compare']).roomdateprice.box
 
 	#definite-data
 		- for (var i =0 ; i<firstday-1;i++){
@@ -37,11 +37,21 @@ div(id="hotel-month-"+hotel["id"])
 		- }	
 		each d in hotelMonth
 			input(value=d.revcal, class=( d.overbooked ? "overbooked " : " ")).box
-
-
+	#events-data
+		- for (var i =0 ; i<firstday-1;i++){
+			.box.NaN 
+		- }	
+		each d in hotelMonth
+			- var datestring = d.date.format('DDMMYYYY');
+			- if (events.agenda[datestring]) {
+				div(id="event-"+hotel["id"]+"-"+datestring, class="event" ).box
+					| #{events.agenda[datestring].length}
+			- } else {
+				div(id="event-"+hotel["id"]+"-"+datestring).box.NaN
+			- }
 div(id="calendar-data-"+hotel["id"]).changed
 
-div(id="modified-prices-modal-"+hotel["id"], tabindex="-1",role="dialog",aria-labelledby="pamf",aria-hidden="true").modal.fade.calendar-modal
+div(id="modified-prices-modal-"+hotel["id"], tabindex="-1",role="dialog",aria-labelledby="",aria-hidden="true").modal.fade.calendar-modal
 	div.modal-dialog
 		div.modal-content
 			div.modal-header
@@ -49,11 +59,15 @@ div(id="modified-prices-modal-"+hotel["id"], tabindex="-1",role="dialog",aria-la
 					span(arira-hidden="true")
 						| &times;
 				span(id="myModalLabel").modal-title
-					| This is the title
+					| Updates in prices
 
 			div.modal-body.row
-					
-div(id="add-event-modal-"+hotel["id"], tabindex="-1",role="dialog",aria-labelledby="pamf",aria-hidden="true").modal.fade.calendar-modal
+			div.modal-footer
+				button(type="button").btn.btn-primary.update-changes-button
+					| Update Changes
+
+
+div(id="add-event-modal-"+hotel["id"], tabindex="-1",role="dialog",aria-labelledby="",aria-hidden="true").modal.fade.add-event-modal
 	div.modal-dialog
 		div.modal-content
 			div.modal-header
@@ -61,6 +75,45 @@ div(id="add-event-modal-"+hotel["id"], tabindex="-1",role="dialog",aria-labelled
 					span(arira-hidden="true")
 						| &times;
 				span(id="myModalLabel").modal-title
-					| This is the title
-
+					| Create and add new event
 			div.modal-body.row
+				div.add-event-form-container
+					form(method="post", action="").add-event-form
+						input(type='hidden', name='_csrf', value=_csrf)
+						div.event-name-input.form-group
+							label(for="event-name-input")
+								| Event Name
+							input(
+								type="text",
+								id="event-name-input",
+								name="event-name-input",
+								placeholder="Enter event name"
+							)
+						div.event-dates.input-daterange.input-daterange.form-group
+							label(for="event-date-input")
+								| Event Dates
+							div.event-date-input
+								input(class='datepickr input-small event-date-field-from',type='text',value='',placeholder='From',name='event-date-field-from')
+								span.add-on -
+								input(class='datepicer input-small event-date-field-to',type='text',value='',placeholder='To',name='event-date-field-to')
+						div.event-price-range.form-group
+							label(for="event-price-range-input")
+								| Event price range ( leave empty if no change )
+							div.event-price-range-input
+								input(class='datepickr input-small event-price-range-from',type='text',value='',placeholder='From',name='event-price-range-from')
+								input(class='datepicer input-small event-price-range-to',type='text',value='',placeholder='To',name='event-price-range-to')
+						div.event-details.form-group
+							label(for="event-details-input")
+								| Event Details
+							textarea(rows=4,id="event-details-input", name="event-details-input", placeholder="Enter description, details, restrictions, etc")
+						div.event-hotels.form-group
+							label(for="event-hotels-input")
+								| Hotels Influenced
+							div.event-hotels-input
+								each ev_hotel in hotels
+									input(type="checkbox",id="hotel-"+ev_hotel["id"]+"-checkbox", value=ev_hotel["id"], name="hotel-checkbox[]")
+									label(for="hotel-"+ev_hotel["id"]+"-checkbox")
+										| #{ev_hotel["name"]}
+			div.modal-footer
+				button(type="button").btn.btn-primary.add-event-button
+					| Add event

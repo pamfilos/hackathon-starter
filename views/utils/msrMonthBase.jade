@@ -39,3 +39,10 @@ div(id="hotel-month-"+hotel["id"])
 		each d in hotelMonth
 			div(class=( d.overbooked ? "overbooked " : " ")).box
 				| #{d.revcal}
+	#events-data
+		- for (var i =0 ; i<firstday-1;i++){
+			.box.NaN 
+		- }	
+		each d in hotelMonth
+			div(class=( d.overbooked ? "event " : " ")).box
+				| EXPO

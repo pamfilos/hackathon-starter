@@ -6,6 +6,7 @@
 @import "vendor/clndr";
 @import (css) "vendor/devbridge-autocomplete/content/styles.css";
 @import "colors";
+@import "utils";
 
 // Scaffolding
 // -------------------------
@@ -19,7 +20,7 @@ body {
   padding-top: 60px;
   margin-bottom: 75px;
   background-color: #f4f4f4;
-  font-family: 'Open Sans'
+  font-family: 'Open Sans';
 }
 
 footer {
@@ -38,13 +39,22 @@ footer {
 
 // Navbar
 // -------------------------
+
+
 .navbar.navbar-default {
   background-color: @navbar-bgc;
+  
+  .navbar-nav ul.dropdown-menu {
+    background-color: @navbar-bgc;
 
+    a:hover {
+      background-color: #51687c;
+    }
+  }
   .navbar-nav a {
     color: @navbar-c;
-    
   }
+
 
 
   a {
@@ -332,4 +342,251 @@ section {
   background-color: #ccc;
   width: 50px!important;
   border-bottom-right-radius: 4px;
+}
+
+
+// Form containers
+.form-container {
+
+  .form-group {
+    display: inline-block;
+    width: 100%;
+
+    > label {
+      font-weight: 300;
+      width: 100%;
+      font-size: 15px;
+    }
+
+    .events-hotel-input {
+      width: auto;
+    }
+  }
+
+  span.add-on {
+    float: left;
+    height: 100%;
+    padding: 12px 15px;
+  }
+
+  .event-date-input input, textarea {
+    font-size: 15px;
+    font-weight: 100;
+    width: auto;
+  }
+
+  input, textarea {
+    font-size: 15px;
+    font-weight: 100;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-width: 100%;
+  }
+
+
+  .ui-button .ui-button-text {
+    line-height: normal;
+    font-size: 15px;
+    font-weight: 100;
+    font-family: @basic-font;
+  }
+}
+
+.btn {
+  font-weight: 100;
+  font-size: 16px;
+}
+
+.btn-primary {
+  background-color: @scndr-bgc;
+  color: #fff;
+  border-color: @scndr-bgc; 
+}
+
+.btn-main {
+  background-color: @navbar-bgc;
+  color: #fff;
+  border-color: @navbar-bgc; 
+  border-radius: 3px;
+}
+
+.btn-main:hover,
+.btn-main:focus {
+  color: #fff;
+  box-shadow: 0 10px 20px #ccc;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: @scndr-bgc-hover;
+  border-color: @scndr-bgc-hover;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+  background: none;
+  background-color: @scndr-bgc;
+  color: #fff;
+  border-color: @scndr-bgc;
+  border-radius: 3px; 
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+  background: none;
+  background-color: @navbar-bgc;  
+  color: #fff;
+  border-color: @navbar-bgc;
+  border-radius: 3px; 
+}
+
+.modal {
+  .modal-header {
+    background-color: @scndr-bgc;
+    color: #fff;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    
+    button {
+      position: absolute;
+      background: transparent;
+      border: 0;
+    }   
+  }
+  .modal-body {
+    padding: 40px 40px;
+    
+    .nodata {
+      text-align: center;
+    }
+  }
+
+  .modal-title {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 100;
+  }
+
+  ul.changed-prices {
+    padding:15px;
+    list-style-type: none;
+
+    li {
+      width: 100%;
+      display: inline-block;
+      float: left;
+      border-bottom: 1px solid #ccc;
+
+      div {
+        float: left;
+        width: 25%;
+        text-align: center;
+        padding: 3px 0;
+        border-right: 1px solid #ccc;
+      }
+      
+      div:first-child {
+        border-left: 1px solid #ccc;
+      }
+    }
+
+    li.header {
+      font-weight: 600;
+      background-color: #ccc;
+
+      div {
+        border-right: 1px solid #fff;
+      }
+
+      div:last-child {
+        border-right: 0;
+      }
+    }
+
+  } 
+
+  .add-event-form-container {
+    .form-group {
+      display: inline-block;
+      width: 100%;
+
+      > label {
+        font-weight: 300;
+        width: 100%;
+        font-size: 15px;
+      }
+
+      .events-hotel-input {
+        width: auto;
+      }
+    }
+
+    span.add-on {
+      float: left;
+      height: 100%;
+      padding: 12px 15px;
+    }
+
+    .event-date-input input, textarea {
+      font-size: 15px;
+      font-weight: 100;
+      width: auto;
+      float: left;
+    }
+
+    input, textarea {
+      font-size: 15px;
+      font-weight: 100;
+      width: 100%;
+      border: 1px solid #ccc;
+      padding: 10px;
+      max-width: 100%;
+    }
+    
+
+    .ui-button .ui-button-text {
+      line-height: normal;
+      font-size: 15px;
+      font-weight: 100;
+      font-family: @basic-font;
+    }
+  }
+
+  .btn {
+    font-weight: 100;
+    font-size: 16px;
+  }
+
+  .btn-primary {
+    background-color: @scndr-bgc;
+    color: #fff;
+    border-color: @scndr-bgc; 
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: @scndr-bgc-hover;
+    border-color: @scndr-bgc-hover;
+  }
+
+  .ui-state-default, .ui-widget-content .ui-state-default,
+  .ui-widget-header .ui-state-default {
+    background: none;
+    background-color: @scndr-bgc;
+    color: #fff;
+    border-color: @scndr-bgc;
+    border-radius: 3px; 
+  }
+
+  .ui-state-active, .ui-widget-content .ui-state-active,
+  .ui-widget-header .ui-state-active {
+    background: none;
+    background-color: @navbar-bgc;  
+    color: #fff;
+    border-color: @navbar-bgc;
+    border-radius: 3px; 
+  }
 }

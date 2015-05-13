@@ -1,0 +1,133 @@
+extends ../layout
+
+block styles
+	!= css('vendors/jquery-ui/themes/smoothness/jquery-ui.min')
+	!= css('vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker')
+	!= css('events')
+
+
+block content
+	div.event-list.row
+		header
+			.title
+				| Event List
+			- if (user.profile.role.indexOf("admin") >-1)
+				.buttons
+					a(id="add-event-modal-but" data-toggle="modal", data-target="#add-event-modal").pull-right.btn.btn-main
+						span.fa.fa-plus
+						| Add event
+		each e in events
+			div(id="event-box-"+e._id).col-sm-2.col-xs-12
+				.event
+					header
+						div.name #{e.name}
+						- if (user.profile.role.indexOf("admin") >-1)
+							div.actions
+								a(id=e._id data-toggle="modal", data-target="#edit-event-modal").pull-right.btn
+									span.fa.fa-edit
+								a(id='delete-'+e._id, data-toggle="modal", data-target="#delete-event-modal").pull-right.btn.delete-event-modal-btn
+									span.fa.fa-trash
+					div.dates.ev-box
+						div.title
+							| Dates
+						div.start.left 
+							span.text F:
+							| !{moment(e.start).format('DD/MM/YYYY')}
+						div.end.right
+							span.text T:
+							| !{moment(e.end).format('DD/MM/YYYY')}
+					div.prices.ev-box
+						div.title
+							| Prices
+						div.priceMin.left
+							span.text Min
+							| !{e.priceMin ? e.priceMin : '-'}
+						div.priceMax.right
+							span.text Max
+							| !{e.priceMax ? e.priceMax : '-'}
+					div.details.ev-box
+						div.title
+							| Details
+						div.body #{e.details ? e.details : '-'}
+					div.hotels.ev-box
+						each hotel in (e.hotels ? e.hotels : [])
+							- if (hotelNames[hotel])
+								.btn-hotels-container
+									a.btn.btn-hotels #{hotelNames[hotel]}
+							
+
+	- if (user.profile.role.indexOf("admin") >-1)
+		div(id="add-event-modal", tabindex="-1",role="dialog",aria-labelledby="",aria-hidden="true").modal.fade.add-event-modal
+			div.modal-dialog
+				div.modal-content
+					div.modal-header
+						button(type="button", data-dismiss="modal", aria-label="Close")
+							span(arira-hidden="true")
+								| &times;
+						span(id="myModalLabel").modal-title
+							| Create and add new event
+					div.modal-body.row
+						div.add-event-form-container
+							form(method="post", action="").add-event-form
+								input(type='hidden', name='_csrf', value=_csrf)
+								div.event-name-input.form-group
+									label(for="event-name-input")
+										| Event Name
+									input(
+										type="text",
+										id="event-name-input",
+										name="event-name-input",
+										placeholder="Enter event name"
+									)
+								div.event-dates.input-daterange.input-daterange.form-group
+									label(for="event-date-input")
+										| Event Dates
+									div.event-date-input
+										input(class='datepickr input-small event-date-field-from',type='text',value='',placeholder='From',name='event-date-field-from')
+										span.add-on -
+										input(class='datepicer input-small event-date-field-to',type='text',value='',placeholder='To',name='event-date-field-to')
+								div.event-price-range.form-group
+									label(for="event-price-range-input")
+										| Event price range ( leave empty if no change )
+									div.event-price-range-input
+										input(class='datepickr input-small event-price-range-from',type='text',value='',placeholder='From',name='event-price-range-from')
+										input(class='datepicer input-small event-price-range-to',type='text',value='',placeholder='To',name='event-price-range-to')
+								div.event-details.form-group
+									label(for="event-details-input")
+										| Event Details
+									textarea(rows=4,id="event-details-input", name="event-details-input", placeholder="Enter description, details, restrictions, etc")
+								div.event-hotels.form-group
+									label(for="event-hotels-input")
+										| Hotels Influenced
+									div.event-hotels-input
+										each ev_hotel in hotels
+											input(type="checkbox",id="hotel-"+ev_hotel["id"]+"-checkbox", value=ev_hotel["id"], name="hotel-checkbox[]")
+											label(for="hotel-"+ev_hotel["id"]+"-checkbox")
+												| #{ev_hotel["name"]}
+					div.modal-footer
+						button(type="button").btn.btn-primary.add-event-button
+							| Add event
+
+		div(id="delete-event-modal", tabindex="-1",role="dialog",aria-labelledby="",aria-hidden="true").modal.fade.delete-event-modal
+			div.modal-dialog.modal-sm
+				div.modal-content
+					div.modal-header
+						button(type="button", data-dismiss="modal", aria-label="Close")
+							span(arira-hidden="true")
+								| &times;
+						span(id="myModalLabel").modal-title
+							| Delete event - 
+							span#delete-event-name
+					div.modal-body.row
+						| Are you sure you want to delete this event?
+						form(method='post', id="delete-event-modal-form")
+							input(type='hidden', name='_csrf', value=_csrf)
+							input(type='hidden', value="-1", name='delete-hidden-evid')
+					div.modal-footer
+						button(type="button", data-dismiss="modal").btn.btn-main.add-event-button
+							| Cancel
+						button(type="button").btn.btn-danger.delete-event-btn
+							| Delete
+
+block javascript
+	!= js('events')

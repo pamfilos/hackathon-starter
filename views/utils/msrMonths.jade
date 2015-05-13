@@ -2,6 +2,7 @@ each hotel in hotels
 		- if (hotelMonthGroup[hotel["id"]].length > 0){
 			include ./msrMonth.jade
 			include ./msrTabHotelSettings.jade
+			include ./msrEventsList.jade
 		- } else {
 			div(id="hotel-month-"+hotel["id"]).hotel-month 
 				div.nodata-warning

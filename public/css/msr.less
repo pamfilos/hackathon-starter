@@ -1,4 +1,4 @@
-@import "colors";
+@import "utils";
 
 .date {
 	float: left;
@@ -165,6 +165,10 @@
 			.changed {
 				background-color: purple;
 			}
+			
+			.invalid-input {
+				border: 3px solid red;
+			}
 
 			.overbooked {
 				background-color: rgba(255, 90, 55, 0.48);
@@ -208,6 +212,16 @@
 				}
 			}
 
+			#events-data {
+				.box {
+					background-color: @cal-events-box;
+					font-weight: 700;
+					color: #fff;
+				}
+				.box.event {
+					background-color: #448061;
+				}
+			}
 
 		}
 
@@ -250,6 +264,9 @@
 			}
 			.revcalc {
 				background-color: @cal-revcal;
+			}
+			.events {
+				background-color: @cal-events;
 			}
 		}
 
@@ -425,3 +442,33 @@
 		}
 	}	
 }
+
+#hotel-events-modal {
+	.modal-row {
+		> div {
+			float: left;
+		}
+	}
+	.name {
+		width: 35%;
+	}
+	.price, .date {
+		width: 15%;
+	}
+	.arrow {
+		width: 5%;
+
+		a::before {
+			content: "\f077";
+		}
+		a.collapsed::before {
+			content: "\f078";
+		}
+	}
+	.event-collapse {
+		width: 100%;
+		background-color: #eee;
+		padding: 5px;
+	}
+}
+

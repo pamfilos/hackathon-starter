@@ -1,0 +1,23 @@
+div#events-list
+	each event in events.events
+		div.modal-row
+			div.name #{event.name}
+			div.date #{event.start.format('DD/MM/YYYY')}
+			div.date #{event.end.format('DD/MM/YYYY')}
+			div.price #{event.priceMin ? event.priceMin : '-'}
+			div.price #{event.priceMax ? event.priceMax : '-'}
+			div.arrow
+				a(
+					data-toggle="collapse",
+					href="#collapseDiv"+event._id,
+					aria-expanded="false",
+					aria-controls="collapseExample"
+				).fa.fa-chevron-down
+			div(id="collapseDiv"+event._id).collapse.event-collapse
+				b Details:
+				| #{event.details}
+				br
+				b Hotels:
+				each hotel_id in event.hotels
+					| #{hotel_id}
+				br

@@ -1,0 +1,92 @@
+@import "colors";
+
+@basic-font: 'Open Sans';
+
+@keyframes rota {
+    25%  { transform: rotate(270deg); }
+    50%  { transform: rotate( 90deg); }
+    75%  { transform: rotate(360deg); }
+    100% { transform: rotate(180deg); }
+}
+
+@-webkit-keyframes rota {
+    25%  { transform: rotate(270deg); }
+    50%  { transform: rotate( 90deg); }
+    75%  { transform: rotate(360deg); }
+    100% { transform: rotate(180deg); }
+}
+@-moz-keyframes rota {
+  25%  { transform: rotate(270deg); }
+  50%  { transform: rotate( 90deg); }
+  75%  { transform: rotate(360deg); }
+  100% { transform: rotate(180deg); }
+}
+@-o-keyframes rota {
+  25%  { transform: rotate(270deg); }
+  50%  { transform: rotate( 90deg); }
+  75%  { transform: rotate(360deg); }
+  100% { transform: rotate(180deg); }
+}
+
+.ajaxloader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #8C8C8C;
+    display: none;
+
+    .spinner {
+        /* Size and position */
+        font-size: 100px; /* 1em */
+        width: 100px!important;
+        height: 100px;
+        position: relative;
+        margin: auto;
+
+        /* Styles */
+        border-radius: 50%;
+        background: #FF4F72; /* Fallback */
+        background:
+        linear-gradient(@navbar-bgc 50%, #ccc 50%), /* First column */
+        linear-gradient(#ccc 50%, @navbar-bgc 50%); /* Second column */
+        background-position: 
+        0 0,    /* Position of 1st column */
+        100% 0; /* Position of 2nd column */
+        background-size: 50% 100%; /* Contraction of "50% 100%, 50% 100%" */
+        background-repeat: no-repeat;
+        box-shadow: 
+        inset 0 0 0 .12em rgba(0,0,0,0.2), /* Inner border */
+        0 0 0 .12em rgba(255,255,255,0.1); /* Outter border */
+        opacity: 0.7;
+        animation: rota 3s infinite alternate;
+        -webkit-animation: rota 3s infinite alternate;
+        -moz-animation:    rota 3s infinite alternate;
+        -o-animation:      rota 3s infinite alternate;
+    }
+
+    .spinner:after {
+        /* Size */
+        content: "";
+        width: 100px;
+        height: 100px;
+
+        /* Perfect centering */
+        position: absolute;
+        // top: 25%;
+        // left: 25%;
+
+        /* Styles */
+        border: .12em solid rgba(255,255,255,0.3);
+        border-radius: inherit;
+    }
+}
+
+.centered {
+  position: fixed;
+  top: 35%;
+  left: 43%;
+  /* bring your own prefixes */
+  // transform: translate(-50%, -50%);
+  // -ms-transform: translate(-50%,-50%); /* IE 9 */
+  // -webkit-transform: translate(-50%,-50%); /* Safari */
+}

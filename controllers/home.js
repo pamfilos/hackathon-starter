@@ -409,7 +409,14 @@ exports.msr = function(req, res) {
     			console.log('------we are here 2222 ----');
 				c(error, results);
 			});
-		}//,
+		},
+		events: function(c){
+			api.protel.getEventsAgendaCurrentMonth(function(error, results){
+				c(error, results);
+			})
+		}
+
+		//,
 		// hotelAvailability: function(c){
 		// 	api.protel.getAndUpdateObjectWithDates('./lib/proteloverall.json',function(error, results){
 		// 		c(error, results);
@@ -425,7 +432,8 @@ exports.msr = function(req, res) {
 			// hotelInfo: results.hotelInfo.hotel,
 			// hotelInfo: results.hotelInfo,
 			// hotelRooms: results.hotelRooms,
-			hotelMonthGroup: results.hotelMonthGroup
+			hotelMonthGroup: results.hotelMonthGroup,
+			events: results.events
     		// hotelAvailability: results.hotelAvailability
 		});
 	});
@@ -457,6 +465,11 @@ exports.msrMonth = function(req, res) {
 			api.protel.getPriceCalculationsGroup(req.query['month'],function(error, results){
 				c(error, results);
 			});
+		},
+		events: function(c){
+			api.protel.getEventsAgendaMonth(req.query['month'],function(error, results){
+				c(error, results);
+			})
 		}
 	},
 	function(err, results){
@@ -465,7 +478,8 @@ exports.msrMonth = function(req, res) {
 			month: results.month,
 			hotels: results.hotelInfo,
     		hotelRooms: results.hotelRooms,
-    		hotelMonthGroup: results.hotelMonthGroup
+    		hotelMonthGroup: results.hotelMonthGroup,
+			events: results.events
 		});
 	});
 };

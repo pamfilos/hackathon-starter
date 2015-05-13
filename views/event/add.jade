@@ -1,0 +1,53 @@
+extends ../fullscreen
+
+block styles
+	!= css('vendors/jquery-ui/themes/smoothness/jquery-ui.min')
+	!= css('vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker')
+
+block content
+	div.add-event-form-container.form-container
+		header
+			| Add new event
+		form(method="post", action="/events/add").add-event-form.form-box
+			input(type='hidden', name='_csrf', value=_csrf)
+			div.event-name-input.form-group
+				label(for="event-name-input")
+					| Event Name
+				input(
+					type="text",
+					id="event-name-input",
+					name="event-name-input",
+					placeholder="Enter event name"
+				)
+			div.event-dates.input-daterange.input-daterange.form-group
+				label(for="event-date-input")
+					| Event Dates
+				div.event-date-input
+					input(class='datepickr input-small event-date-field-from',type='text',value='',placeholder='From',name='event-date-field-from')
+					span.add-on -
+					input(class='datepicer input-small event-date-field-to',type='text',value='',placeholder='To',name='event-date-field-to')
+			div.event-price-range.form-group
+				label(for="event-price-range-input")
+					| Event price range ( leave empty if no change )
+				div.event-price-range-input
+					input(class='datepickr input-small event-price-range-from',type='text',value='',placeholder='From',name='event-price-range-from')
+					input(class='datepicer input-small event-price-range-to',type='text',value='',placeholder='To',name='event-price-range-to')
+			div.event-details.form-group
+				label(for="event-details-input")
+					| Event Details
+				textarea(rows=4,id="event-details-input", name="event-details-input", placeholder="Enter description, details, restrictions, etc")
+			div.event-hotels.form-group
+				label(for="event-hotels-input")
+					| Hotels Influenced
+				div.event-hotels-input
+					each ev_hotel in hotels
+						input(type="checkbox",id="hotel-"+ev_hotel["id"]+"-checkbox", value=ev_hotel["id"], name="hotel-checkbox[]")
+						label(for="hotel-"+ev_hotel["id"]+"-checkbox")
+							| #{ev_hotel["name"]}
+			hr
+			div.form-buttons.form-group
+				button(type='submit', name='event-submit-button').btn
+					| Add event
+	
+block javascript
+	!= js('events')

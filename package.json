@@ -60,7 +60,8 @@
     "uglify-js": "^2.4.16",
     "validator": "^3.32.0",
     "yui": "^3.18.1",
-    "clndr": "1.2.10"
+    "clndr": "1.2.10",
+    "mongoose-moment": "0.0.1"
   },
   "devDependencies": {
     "blessed": "^0.0.49",

@@ -26,6 +26,7 @@ var connectAssets = require('connect-assets');
  */
 var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
+var eventController = require('./controllers/event');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 
@@ -125,6 +126,12 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
+
+
+app.get('/events', passportConf.isAuthenticated, eventController.index);
+app.get('/events/add', passportConf.isAuthenticated, eventController.getAdd);
+app.post('/events/add', passportConf.isAuthenticated, eventController.postAdd);
+app.post('/events/delete', passportConf.isAuthenticated, eventController.postDelete);
 
 /**
  * API examples routes.

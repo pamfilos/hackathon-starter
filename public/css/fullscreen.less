@@ -5,7 +5,7 @@
 @import "themes/default";
 @import "vendor/clndr";
 @import (css) "vendor/devbridge-autocomplete/content/styles.css";
-@import "colors";
+@import "utils";
 
 
 // Variables
@@ -83,6 +83,10 @@ footer {
 .navbar {
   height: @navheight;
   position: absolute;
+
+  .navbar-nav ul.dropdown-menu {
+    background-color: @navbar-bgc;
+  }
 }
 .navbar.navbar-default {
   background-color: @navbar-bgc;
@@ -94,6 +98,8 @@ footer {
   a {
     color: @navbar-c;
   }
+
+
 }
 
 .collapse.navbar-collapse {
@@ -131,3 +137,131 @@ footer {
 [class^='ion-'] {
   margin-right: 6px;
 }
+
+
+// Form containers
+.form-container {
+  background-color: #fff;
+  box-shadow: 0 0 5px #ccc;
+  width: 600px;
+  margin: 0 auto;
+  border-radius: 6px;
+
+  header {
+    background-color: @scndr-bgc;
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 100;
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    min-height: 16.42857143px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    
+  }
+
+  .form-box {
+    padding: 25px;
+
+    .form-group {
+      display: inline-block;
+      width: 100%;
+
+      > label {
+        font-weight: 300;
+        width: 100%;
+        font-size: 15px;
+      }
+
+      .events-hotel-input {
+        width: auto;
+      }
+    }
+
+    span.add-on {
+      float: left;
+      height: 100%;
+      padding: 12px 15px;
+    }
+
+    .event-date-input input, textarea {
+      font-size: 15px;
+      font-weight: 100;
+      width: auto;
+      float: left;
+    }
+
+    input, textarea {
+      font-size: 15px;
+      font-weight: 100;
+      width: 100%;
+      border: 1px solid #ccc;
+      padding: 10px;
+      max-width: 100%;
+    }
+
+    .form-buttons {
+      display: inline-block;
+      text-align: right;
+
+      button {
+      line-height: normal;
+      font-size: 15px;
+      font-weight: 100;
+      font-family: @basic-font;
+    background-color: @scndr-bgc;
+    color: #fff;
+    border-color: @scndr-bgc;
+    border-radius: 3px; 
+      }
+    }
+
+
+    .ui-button .ui-button-text {
+      line-height: normal;
+      font-size: 15px;
+      font-weight: 100;
+      font-family: @basic-font;
+      border-radius: 3px; 
+
+    }
+  }
+  .btn {
+    font-weight: 100;
+    font-size: 16px;
+  }
+
+  .btn-primary {
+    background-color: @scndr-bgc;
+    color: #fff;
+    border-color: @scndr-bgc; 
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: @scndr-bgc-hover;
+    border-color: @scndr-bgc-hover;
+  }
+
+  .ui-state-default, .ui-widget-content .ui-state-default,
+  .ui-widget-header .ui-state-default {
+    background: none;
+    background-color: @scndr-bgc;
+    color: #fff;
+    border-color: @scndr-bgc;
+    border-radius: 3px; 
+  }
+
+  .ui-state-active, .ui-widget-content .ui-state-active,
+  .ui-widget-header .ui-state-active {
+    background: none;
+    background-color: @navbar-bgc;  
+    color: #fff;
+    border-color: @navbar-bgc;
+    border-radius: 3px; 
+  }
+}
+

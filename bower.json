@@ -15,13 +15,14 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "bootstrap" : "latest",
-    "leaflet" : "latest",
-    "clndr": "latest"
+    "bootstrap": "latest",
+    "leaflet": "latest",
+    "clndr": "latest",
+    "jquery-ui": "~1.11.4",
+    "moment-range": "~1.0.9",
+    "jquery.serializeJSON": "~2.6.0"
   },
-  "devDependences": {
-
-  },
+  "devDependences": {},
   "ignore": [
     "**/.*",
     "node_modules",
