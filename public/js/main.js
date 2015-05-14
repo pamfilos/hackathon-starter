@@ -95,59 +95,45 @@ $(document).ready(function() {
   // });
 
   var nowTemp = new Date();
-  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  var tmp = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
-
-
-  checkin = $('#booking-date-field-from').datepicker({
+  $('#booking-date-field-from').datepicker({
     'format': 'dd/mm/yyyy',
     'autoclose': true,
     'calendar-weeks': true,
     'startView': 'year',
-    onRender: function(date) {
-      return date.valueOf() < now.valueOf() ? 'disabled' : '';
-    }
-  }).on('changeDate', function(ev) {
-    if (ev.date.valueOf() > checkout.date.valueOf()) {
-      var newDate = new Date(ev.date)
-      newDate.setDate(newDate.getDate() + 1);
-      checkout.setValue(newDate);
-    }
-    checkin.hide();
-    $('#booking-date-field-to')[0].focus();
-  }).data('datepicker');
+    'startDate': tmp
+  }).on('changeDate', function(selected){
+    startDate = new Date(selected.date.valueOf());
+    startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+    from = moment(new Date(selected.date.valueOf()));
+    $('#booking-date-field-to').datepicker('setStartDate', startDate);
+  }); 
 
+  $('#booking-date-field-to').datepicker({
+    'format': 'dd/mm/yyyy',
+    'autoclose': true,
+    'calendar-weeks': true,
+    'startView': 'year'
+  }).on('changeDate', function(selected){
+    FromEndDate = new Date(selected.date.valueOf());
+    FromEndDate.setDate(FromEndDate.getDate(new Date(selected.date.valueOf())));
+    to = moment(new Date(selected.date.valueOf()));
+    changedDateActions();
+    $('#booking-date-field-from').datepicker('setEndDate', FromEndDate);
+  });
 
-  checkout = $('#booking-date-field-to').datepicker({
-    onRender: function(date) {
-      return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-    }
-  }).on('changeDate', function(ev) {
-    checkout.hide();
-  }).data('datepicker');
-  // $(".input-daterange").datepicker({
-  //   'format': 'dd/mm/yyyy',
-  //   'autoclose': true,
-  //   'calendar-weeks': true,
-  //   'startView': 'year'
-  // }).on('changeDate', function(e){
-  //   d = e.date.getDate()+'/'+(e.date.getMonth()+1).toString()+'/'+e.date.getFullYear();
-  //   from = $('#booking-date-field-from').val();
-  //   to = $('#booking-date-field-to').val();
-  //   console.log(from);
-  //   from = moment(from, "DD/MM/YYYY");
-  //   to = moment(to, "DD/MM/YYYY");
-  //   console.log(from._i);
-  //   from_week = from.week();
-  //   to_week = to.week();
-  //   day_count = to.diff(from, 'days');
-  //   console.log('Dates',day_count,'days:',from._i+'('+from_week+')'+'-',to._i+'('+from_week+')');
-  //   var text = 'Looking for <b>'+day_count+'</b> night(s) in a <b>double</b> room in <b>Alexandros Hotel</b> from the <b>'+from._i+'</b> until the <b>'+to._i+'</b>';
-  //   $('#status-info-text p').html(text);
-  //   // updateDates('07-15-2015', '07-15-2015');
-  //   updateCalendarView(from, to, day_count);
-  //   updateDates(from.format('MM-DD-YYYY'), to.format('MM-DD-YYYY'));
-  // });  
+  function changedDateActions(){
+    from_week = from.week();
+    to_week = to.week();
+    day_count = to.diff(from, 'days');
+    // console.log('Dates',day_count,'days:',from._i+'('+from_week+')'+'-',to._i+'('+from_week+')');
+    var text = 'Looking for <b>'+day_count+'</b> night(s) in a <b>double</b> room in Athens from the <b>'+from._i+'</b> until the <b>'+to._i+'</b>';
+    $('#status-info-text').html(text);
+    // updateDates('07-15-2015', '07-15-2015');
+    updateCalendarView(day_count);
+    updateDates(from.format('MM-DD-YYYY'), to.format('MM-DD-YYYY'));
+  }
 
   $('#hotel-autocomplete').autocomplete({
     serviceUrl: '/hotels/autocomplete',
@@ -191,7 +177,7 @@ $(document).ready(function() {
 
 });
 
-var updateCalendarView = function(from, to, day_count) {
+var updateCalendarView = function(day_count) {
   var classname = '.calendar-day-'+from.format('YYYY-MM-DD');
   $(".day").removeClass('onrange');
   for(var i =0 ; i<day_count;i++){
@@ -201,5 +187,5 @@ var updateCalendarView = function(from, to, day_count) {
   }
   if ( calendar.month.get('month') != from.get('month') )
     calendar.setMonth(from.get('month'));
-  console.log('updateCalendarView ::',month);
+  // console.log('updateCalendarView ::',month);
 };

@@ -27,12 +27,12 @@ exports.cityHotelOverall = function(req, res) {
 			c(null, api.mrjson.fileToObj('../data/json/overall.json'));
 		},
 		medical: function(c){
-			api.congress.synedriogr.medicalEvents('2015-03-28', '2015-03-28', '30', function(error, res){
+			api.congress.synedriogr.medicalEvents('', '', '30', function(error, res){
 				c(error, res);
 			});
 		},
 		others: function(c){
-			api.congress.synedriogr.otherEvents('2015-03-28', '2015-03-28', '30', function(error, res){
+			api.congress.synedriogr.otherEvents('', '', '30', function(error, res){
 				c(error, res);
 			});
 		},
@@ -59,12 +59,12 @@ exports.chris = function(req, res) {
 			c(null, api.mrjson.fileToObj('../data/json/overall.json'));
 		},
 		medical: function(c){
-			api.congress.synedriogr.medicalEvents('2015-03-28', '2015-03-28', '30', function(error, res){
+			api.congress.synedriogr.medicalEvents(null, null, 30, function(error, res){
 				c(error, res);
 			});
 		},
 		others: function(c){
-			api.congress.synedriogr.otherEvents('2015-03-28', '2015-03-28', '30', function(error, res){
+			api.congress.synedriogr.otherEvents(null, null, 30, function(error, res){
 				c(error, res);
 			});
 		}
